@@ -25,6 +25,9 @@ export const metadata = {
     "Protect your Windows laptop with instant intruder detection. Silent, powerful, and always watching.",
   keywords:
     "anti-theft, laptop security, Windows protection, webcam capture, Telegram bot",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {

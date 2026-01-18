@@ -29,20 +29,31 @@
 /* Nav */
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 1.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 90%;
+  max-width: 1000px;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
-  transition: all 0.3s ease;
+  background: rgba(5, 25, 15, 0.75); /* Darker, less transparent Green Glass */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: 24px;
+  padding: 0.2rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.navHidden {
+  transform: translate(-50%, -200%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .navContainer {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,15 +67,19 @@
   font-size: 1.25rem;
   letter-spacing: -0.02em;
   font-family: var(--font-space);
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
 }
 
 .logoIcon {
-  background: #00ff88;
-  color: #000;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.569); /* Brighter light background */
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navLinks {
@@ -526,20 +541,45 @@
 }
 
 .terminalHeader {
-  background: #1a1a1a;
-  padding: 0.75rem 1rem;
+  background: #2d2d2d; /* Windows Title Bar Color */
+  padding: 0.5rem 1rem;
   display: flex;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
 }
 
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.terminalTitle {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.8rem;
+  color: #fff;
 }
-.red { background: #ff5f56; }
-.yellow { background: #ffbd2e; }
-.green { background: #27c93f; }
+
+.terminalIcon {
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.terminalControls {
+  display: flex;
+  gap: 1rem;
+}
+
+.winBtn {
+  color: #888;
+  font-size: 0.9rem;
+  cursor: default;
+  line-height: 1;
+}
+
+.winBtn:hover {
+  color: #fff;
+}
+
+.winClose:hover {
+  color: #ff5f56; /* Red for close */
+}
 
 .terminalBody {
   padding: 1.5rem;
