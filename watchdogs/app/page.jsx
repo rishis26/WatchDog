@@ -225,10 +225,10 @@ export default function Home() {
               {/* Title Side */}
               <motion.div 
                 className={`${styles.timelineSide} ${styles.titleSide}`}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, margin: "-150px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-15%" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <h3>{feature.title}</h3>
               </motion.div>
@@ -236,10 +236,10 @@ export default function Home() {
               {/* Center Node */}
               <motion.div 
                 className={styles.timelineNode}
-                initial={{ scale: 0.5, opacity: 0 }}
+                initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: false, margin: "-150px" }}
-                transition={{ duration: 0.5, ease: "backOut" }}
+                viewport={{ once: false, margin: "-15%" }}
+                transition={{ duration: 0.4, ease: "backOut" }}
               >
                 <div className={styles.timelineIcon}>{feature.icon}</div>
               </motion.div>
@@ -247,10 +247,10 @@ export default function Home() {
               {/* Detail Side */}
               <motion.div 
                 className={`${styles.timelineSide} ${styles.detailSide}`}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, margin: "-150px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-15%" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <div className={styles.detailCard}>
                   <p>{feature.desc}</p>
@@ -355,7 +355,6 @@ export default function Home() {
             </div>
             <div className={styles.footerLinks}>
               <a href="#">GitHub</a>
-              <a href="#">Telegram Community</a>
               <a href="#">Terms of Service</a>
             </div>
           </div>
