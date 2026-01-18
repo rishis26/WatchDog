@@ -1,21 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
 :root {
-  /* Color Palette - Premium Dark Theme */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #13131a;
-  --bg-tertiary: #1a1a24;
+  /* Color Palette - Premium Cyber Theme */
+  --bg-primary: #050505;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #111111;
 
-  --accent-primary: #6366f1;
-  --accent-secondary: #8b5cf6;
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --accent-primary: #00ff88;
+  --accent-secondary: #00cc6a;
+  --accent-gradient: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
 
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
   --text-tertiary: #71717a;
 
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glow-color: rgba(99, 102, 241, 0.3);
+  --border-color: rgba(0, 255, 136, 0.1);
+  --glow-color: rgba(0, 255, 136, 0.3);
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -54,38 +54,15 @@ body {
 body {
   color: var(--text-primary);
   background: var(--bg-primary);
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  /* Fonts handled by layout.js */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
 }
 
-/* Animated gradient background */
+/* Remove default body gradient as page.module.css handles it */
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(99, 102, 241, 0.15) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(139, 92, 246, 0.15) 0%,
-      transparent 50%
-    );
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 a {
@@ -162,18 +139,20 @@ a {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
+  background: #333;
   border-radius: var(--radius-full);
+  border: 1px solid #111;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-secondary);
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
 }

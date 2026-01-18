@@ -1,8 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import ThreeBackground from './components/ThreeBackground';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from './page.module.css';
 
 const Icons = {
@@ -48,63 +47,39 @@ const Icons = {
   ),
 };
 
-const Laptop = ({ scrollProgress }) => {
-  const rotateY = useTransform(scrollProgress, [0, 1], [0, 720]);
-  const y = useTransform(scrollProgress, [0, 0.5, 1], [0, -40, 0]);
-  
-  return (
-    <motion.div 
-      className={styles.laptopContainer}
-      style={{ rotateY, y }}
-    >
-      <svg viewBox="0 0 300 240" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.laptopSvg}>
-        <rect x="30" y="20" width="240" height="160" rx="12" fill="#111" stroke="#00ff88" strokeWidth="2" />
-        <rect x="40" y="30" width="220" height="140" rx="6" fill="#000" />
-        <rect x="50" y="45" width="100" height="4" rx="2" fill="#00ff88" opacity="0.6" />
-        <rect x="50" y="55" width="140" height="4" rx="2" fill="#00ff88" opacity="0.4" />
-        <rect x="50" y="65" width="80" height="4" rx="2" fill="#00ff88" opacity="0.5" />
-        <circle cx="150" cy="110" r="25" fill="#00ff88" opacity="0.1" />
-        <path d="M142 110l6 6 12-12" stroke="#00ff88" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M10 180h280l-20 20H30l-20-20z" fill="#222" stroke="#00ff88" strokeWidth="1" />
-        <rect x="110" y="180" width="80" height="6" rx="3" fill="#333" />
-        <ellipse cx="150" cy="210" rx="100" ry="10" fill="url(#laptopShadow)" />
-        <defs>
-          <radialGradient id="laptopShadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(150 210) rotate(90) scale(10 100)">
-            <stop stopColor="#00ff88" stopOpacity="0.3" />
-            <stop offset="1" stopColor="#00ff88" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-      </svg>
-    </motion.div>
-  );
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.6, ease: 'easeOut' }
+  }
 };
 
-const StorySection = ({ children, index }) => {
-  return (
-    <motion.section 
-      className={styles.storySection}
-      initial={{ opacity: 0, scale: 0.95, y: 50 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.4 }}
-      transition={{ duration: 1, ease: 'easeOut' }}
-    >
-      {children}
-    </motion.section>
-  );
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
 };
 
 export default function Home() {
-  const containerRef = useRef(null);
+  const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
+    target: targetRef,
+    offset: ["start end", "end end"]
   });
+
+  const x = useTransform(scrollYProgress, [0.1, 0.9], ["20%", "-70%"]);
 
   return (
     <>
-      <ThreeBackground />
       
-      <div ref={containerRef} className={styles.page}>
+      <div className={styles.page}>
         <nav className={styles.nav}>
           <div className={styles.navContainer}>
             <div className={styles.logo}>
@@ -112,138 +87,276 @@ export default function Home() {
               <span>WatchDog</span>
             </div>
             <div className={styles.navLinks}>
-              <a href="#features">Capabilities</a>
-              <a href="#setup">Setup</a>
+              <a href="#features">Features</a>
+              <a href="#setup">How to Setup</a>
               <a href="#download" className={styles.navCta}>Get WatchDog</a>
             </div>
           </div>
         </nav>
 
-        {/* Chapter 1: The Hook */}
-        <StorySection index={0}>
-          <div className={styles.hero}>
-            <div className={styles.contentBox}>
-              <div className={styles.badge}>
-                <span className={styles.pulse}></span>
-                CHAPTER 01: THE SILENT GUARD
-              </div>
-              <h1 className={styles.heroTitle}>
-                Your Laptop's
-                <br />
-                <span className={styles.highlight}>Internal WatchDog</span>
-              </h1>
-              <p className={styles.textDesc}>
-                What happens when you walk away? WatchDog is the invisible layer 
-                that wakes up the moment an intruder touches your keys. 
-                Stealthy. Precise. Instant.
-              </p>
-              <div className={styles.heroCtas}>
-                <a href="#features" className={styles.primaryBtn}>Deep Dive</a>
-                <a href="#setup" className={styles.secondaryBtn}>How it Works</a>
-              </div>
-            </div>
-            <div className={styles.visualBox}>
-              <Laptop scrollProgress={scrollYProgress} />
-            </div>
-          </div>
-        </StorySection>
+        {/* Hero Section */}
+        <section className={styles.hero}>
+          <motion.div 
+            className={styles.heroContent}
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeInUp} className={styles.badge}>
+              <span className={styles.pulse}></span>
+              Advanced System Protection
+            </motion.div>
 
-        {/* Chapter 2: The Power */}
-        <StorySection index={1}>
-          <div id="features" className={styles.featuresContent}>
-            <span className={styles.superTitle}>CHAPTER 02: CAPABILITIES</span>
+            <motion.h1 variants={fadeInUp} className={styles.heroTitle}>
+              Your Laptop's <br />
+              <span className={styles.highlight}>Silent Guardian</span>
+            </motion.h1>
+
+            <motion.p variants={fadeInUp} className={styles.heroDesc}>
+              Military-grade anti-theft software that captures intruders, 
+              tracks location, and secures your data. Invisible. Unstoppable.
+            </motion.p>
+
+            <motion.div variants={fadeInUp} className={styles.heroCtas}>
+              <a href="#download" className={styles.primaryBtn}>
+                Download v3.2
+              </a>
+              <a href="#features" className={styles.secondaryBtn}>
+                View Capabilities
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* 3D Visual */}
+          <motion.div 
+            className={styles.heroVisual}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className={styles.laptopContainer}>
+              <svg viewBox="0 0 300 240" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.laptopSvg}>
+                <rect x="30" y="20" width="240" height="160" rx="12" fill="#050505" stroke="#00ff88" strokeWidth="2" />
+                <rect x="40" y="30" width="220" height="140" rx="6" fill="#000" />
+                <rect x="50" y="45" width="100" height="4" rx="2" fill="#00ff88" opacity="0.6" />
+                <rect x="50" y="55" width="140" height="4" rx="2" fill="#00ff88" opacity="0.4" />
+                <rect x="50" y="65" width="80" height="4" rx="2" fill="#00ff88" opacity="0.5" />
+                <circle cx="150" cy="110" r="25" fill="#00ff88" opacity="0.1" />
+                <path d="M142 110l6 6 12-12" stroke="#00ff88" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M10 180h280l-20 20H30l-20-20z" fill="#151515" stroke="#00ff88" strokeWidth="1" />
+                <rect x="110" y="180" width="80" height="6" rx="3" fill="#222" />
+                <defs>
+                   <filter id="glow">
+                      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                      <feMerge>
+                         <feMergeNode in="coloredBlur"/>
+                         <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                   </filter>
+                </defs>
+              </svg>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Central Timeline Features Section */}
+        <section id="features" ref={targetRef} className={styles.timelineSection}>
+          <motion.div 
+            className={styles.timelineHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <span className={styles.sectionTag}>CAPABILITIES</span>
             <h2>Armed for Every Scenario</h2>
-            <div className={styles.featuresGrid}>
-              {[
-                { title: 'Intruder Capture', icon: <Icons.Capture />, desc: 'Instant webcam snapshot.' },
-                { title: 'Silent Mode', icon: <Icons.Silent />, desc: 'Hidden process execution.' },
-                { title: 'Telegram Link', icon: <Icons.Telegram />, desc: 'Direct alerts to mobile.' },
-                { title: 'Auto-Recovery', icon: <Icons.Recovery />, desc: 'Self-healing protection.' },
-                { title: 'WiFi Geo', icon: <Icons.Geo />, desc: 'Network triangulation.' },
-                { title: 'Remote Lock', icon: <Icons.Lock />, desc: 'Command via Telegram.' },
-                { title: 'Instant Alert', icon: <Icons.Alert />, desc: 'Zero-latency push.' },
-                { title: 'Boot Shield', icon: <Icons.Shield />, desc: 'Pre-login security.' },
-              ].map((f, i) => (
-                <motion.div 
-                  key={i} 
-                  className={styles.featureCard}
-                  whileHover={{ y: -10, borderColor: '#00ff88' }}
-                >
-                  <div className={styles.fIcon}>{f.icon}</div>
-                  <h3>{f.title}</h3>
-                  <p>{f.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </StorySection>
+            <p>A complete suite of tools to protect your hardware and data.</p>
+          </motion.div>
 
-        {/* Chapter 3: The Process */}
-        <StorySection index={2}>
-          <div id="setup" className={styles.workflowGrid}>
-            <div className={styles.contentBox}>
-              <span className={styles.superTitle}>CHAPTER 03: THE SETUP</span>
-              <h2>3 Minutes to Safety</h2>
-              <div className={styles.stepList}>
-                <div className={styles.vStep}>
-                  <div className={styles.vNum}>01</div>
-                  <div>
-                    <h4>Bot Intel</h4>
-                    <p>Obtain high-level API access from BotFather.</p>
-                  </div>
-                </div>
-                <div className={styles.vStep}>
-                  <div className={styles.vNum}>02</div>
-                  <div>
-                    <h4>Deployment</h4>
-                    <p>Configure your unique ChatID to link the WatchDog.</p>
-                  </div>
-                </div>
-                <div className={styles.vStep}>
-                  <div className={styles.vNum}>03</div>
-                  <div>
-                    <h4>Shadow Mode</h4>
-                    <p>WatchDog ducks into the background. Armed.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.visualBox}>
-              <div className={styles.terminalBox}>
-                <pre>
-                  <code>
-                    {`# watchdog --init\n> System checking...\n> Camera: OK\n> Network: OK\n> Guardian: ARMED`}
-                  </code>
-                </pre>
-              </div>
-            </div>
+          <div className={styles.centerLine}>
+            <div className={styles.scanningDot}></div>
+            <motion.div style={{ height: scrollYProgress }} className={styles.centerLineProgress} />
           </div>
-        </StorySection>
 
-        {/* Chapter 4: The Command */}
-        <StorySection index={3}>
-          <div id="download" className={styles.ctaBox}>
-            <span className={styles.superTitle}>FINAL CHAPTER</span>
-            <h2>Take Control.</h2>
-            <p>Deploy the WatchDog on your system today.</p>
-            <motion.a 
-              href="#" 
-              className={styles.dlBtn}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          {[
+            { 
+              title: 'Intruder Capture', 
+              desc: 'Automatically triggers the webcam upon 3 failed login attempts. Photos are instantly encrypted and sent to your secure Telegram channel with a timestamp.', 
+              icon: <Icons.Capture /> 
+            },
+            { 
+              title: 'Total Stealth Mode', 
+              desc: 'Operates as a kernel-level system process with no taskbar icon, window, or tray presence. Completely invisible to standard task managers and authorized users.', 
+              icon: <Icons.Silent /> 
+            },
+            { 
+              title: 'Instant Telegram Link', 
+              desc: 'Direct, low-latency connection to your mobile device. Receive high-res snapshots, location maps, and alert logs in milliseconds via the Telegram Bot API.', 
+              icon: <Icons.Telegram /> 
+            },
+            { 
+              title: 'Auto-Recovery Service', 
+              desc: 'Intelligent watchdog daemon monitoring. If the main process is killed or crashes, it automatically respawns within seconds to ensure zero downtime.', 
+              icon: <Icons.Recovery /> 
+            },
+            { 
+              title: 'WiFi Triangulation', 
+              desc: 'Uses nearby WiFi SSIDs and signal strengths to triangulate the device`s geolocation even without a GPS module. Maps are rendered instantly.', 
+              icon: <Icons.Geo /> 
+            },
+            { 
+              title: 'Remote Lock Command', 
+              desc: 'Execute a remote system lock via chat command. Forces the specialized lock screen to engage, preventing any access until you authorize unlock.', 
+              icon: <Icons.Lock /> 
+            },
+            { 
+              title: 'Real-Time Alerts', 
+              desc: 'Push notifications for system startup, shutdown, network changes, and peripheral connections. Stay informed of every interaction with your machine.', 
+              icon: <Icons.Alert /> 
+            },
+            { 
+              title: 'Boot-Level Shield', 
+              desc: 'Integrates with Windows Services to launch before user login. Protects the machine from the moment power is engaged, securing the boot sequence.', 
+              icon: <Icons.Shield /> 
+            },
+          ].map((feature, i) => (
+            <div key={i} className={styles.timelineItem}>
+              
+              {/* Title Side */}
+              <motion.div 
+                className={`${styles.timelineSide} ${styles.titleSide}`}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, margin: "-150px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+              >
+                <h3>{feature.title}</h3>
+              </motion.div>
+
+              {/* Center Node */}
+              <motion.div 
+                className={styles.timelineNode}
+                initial={{ scale: 0.5, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: false, margin: "-150px" }}
+                transition={{ duration: 0.5, ease: "backOut" }}
+              >
+                <div className={styles.timelineIcon}>{feature.icon}</div>
+              </motion.div>
+
+              {/* Detail Side */}
+              <motion.div 
+                className={`${styles.timelineSide} ${styles.detailSide}`}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, margin: "-150px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+              >
+                <div className={styles.detailCard}>
+                  <p>{feature.desc}</p>
+                </div>
+              </motion.div>
+              
+            </div>
+          ))}
+        </section>
+
+        {/* How It Works Section */}
+        <section id="setup" className={styles.section}>
+          <motion.div 
+            className={styles.sectionHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <span className={styles.sectionTag}>SETUP GUIDE</span>
+            <h2>Deployment Process</h2>
+            <p>From zero to protected in under 3 minutes.</p>
+          </motion.div>
+
+          <div className={styles.stepsGrid}>
+            <motion.div 
+              className={styles.stepsContent}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
             >
-              Download WatchDog v3.2
-            </motion.a>
+              <motion.div variants={fadeInUp} className={styles.stepItem}>
+                <div className={styles.stepNum}>01</div>
+                <div className={styles.stepText}>
+                  <h4>Configure Bot</h4>
+                  <p>Message @BotFather on Telegram to create your bot and get the API token.</p>
+                </div>
+              </motion.div>
+              <motion.div variants={fadeInUp} className={styles.stepItem}>
+                <div className={styles.stepNum}>02</div>
+                <div className={styles.stepText}>
+                  <h4>Run Installer</h4>
+                  <p>Launch WatchDog.exe, input your Token and Chat ID when prompted.</p>
+                </div>
+              </motion.div>
+              <motion.div variants={fadeInUp} className={styles.stepItem}>
+                <div className={styles.stepNum}>03</div>
+                <div className={styles.stepText}>
+                  <h4>Go Dark</h4>
+                  <p>The installer vanishes. WatchDog is now running silently in the background.</p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div 
+              className={styles.terminalWrapper}
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className={styles.terminalHeader}>
+                <div className={`${styles.dot} ${styles.red}`}></div>
+                <div className={`${styles.dot} ${styles.yellow}`}></div>
+                <div className={`${styles.dot} ${styles.green}`}></div>
+              </div>
+              <div className={styles.terminalBody}>
+                <p><span className={styles.dim}>C:\Users\Admin&gt;</span> <span className={styles.cmd}>watchdog --init</span></p>
+                <p className={styles.dim}>[INFO] Verifying system integrity...</p>
+                <p className={styles.dim}>[INFO] Camera module: <span className={styles.cmd}>OK</span></p>
+                <p className={styles.dim}>[INFO] Network status: <span className={styles.cmd}>CONNECTED</span></p>
+                <br />
+                <p><span className={styles.cmd}>[SUCCESS] WatchDog Service Installed.</span></p>
+                <p className={styles.dim}>Entering silent mode...</p>
+                <div className={styles.cursor}>_</div>
+              </div>
+            </motion.div>
           </div>
-        </StorySection>
+        </section>
+
+        {/* CTA Section */}
+        <section id="download" className={styles.ctaSection}>
+          <motion.div 
+            className={styles.ctaContainer}
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2>Secure Your Machine.</h2>
+            <p>Join thousands of users who trust WatchDog for silent, effective anti-theft protection.</p>
+            <a href="#" className={styles.primaryBtn}>Download WatchDog v3.2</a>
+          </motion.div>
+        </section>
 
         <footer className={styles.footer}>
-          <div className={styles.footerInner}>
-            <div>WD <span>WatchDog</span></div>
-            <div className={styles.fLinks}>
+          <div className={styles.footerContent}>
+            <div className={styles.logo}>
+              <div className={styles.logoIcon}>WD</div>
+              <span>WatchDog</span>
+            </div>
+            <div className={styles.footerLinks}>
               <a href="#">GitHub</a>
-              <a href="#">Support</a>
-              <p>© 2026 drizzlehx</p>
+              <a href="#">Telegram Community</a>
+              <a href="#">Terms of Service</a>
             </div>
           </div>
         </footer>
