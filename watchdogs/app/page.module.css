@@ -651,7 +651,19 @@
   transition: color 0.2s;
 }
 
-.footerLinks a:hover {
+.footerLinkBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footerLinks a:hover,
+.footerLinkBtn:hover {
   color: #fff;
 }
 /* Modal */
@@ -758,4 +770,88 @@
   .stepsGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Team Section */
+.teamGrid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.teamCard {
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  width: 250px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.teamCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ff88, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.teamCard:hover {
+  transform: translateY(-10px);
+  background: rgba(15, 15, 15, 0.9);
+  border-color: rgba(0, 255, 136, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.15);
+}
+
+.teamCard:hover::before {
+  opacity: 1;
+}
+
+.memberAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+
+.teamCard:hover .memberAvatar {
+  border-color: #00ff88;
+}
+
+.avatarImg {
+  object-fit: cover;
+}
+
+.memberInfo h3 {
+  font-family: var(--font-orbitron);
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.memberHandle {
+  font-family: var(--font-jetbrains);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s;
+}
+
+.teamCard:hover .memberHandle {
+  color: #00ff88;
 }
