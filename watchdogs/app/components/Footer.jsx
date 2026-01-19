@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import styles from "../page.module.css";
 
@@ -15,7 +16,7 @@ export default function Footer() {
         </div>
         <div className={styles.footerLinks}>
           <a href="#">GitHub</a>
-          <a href="#">Terms of Service</a>
+          <Link href="/terms">Terms of Service</Link>
         </div>
       </div>
     </footer>

@@ -76,7 +76,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.569); /* Brighter light background */
+  background: rgba(255, 255, 255, 0.569); 
   padding: 6px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -130,7 +130,7 @@
   align-items: center;
   justify-content: center;
   gap: 4rem;
-  padding-top: 6rem; /* Account for fixed nav */
+  padding-top: 9rem; /* Increased to clear floating nav */
   padding-bottom: 4rem;
   max-width: 1200px; /* Constrain max width for better large screen alignment */
   margin: 0 auto;
@@ -654,8 +654,91 @@
 .footerLinks a:hover {
   color: #fff;
 }
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
 
-/* Responsive */
+.modalContent {
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  padding: 2.5rem;
+  border-radius: 24px;
+  max-width: 600px;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.modalContent h3 {
+  font-family: var(--font-orbitron);
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.modalList {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modalList li {
+  list-style-type: disc;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modalBtn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.declineBtn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.declineBtn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.acceptBtn {
+  background: #00ff88;
+  color: #000;
+}
+
+.acceptBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+}
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
