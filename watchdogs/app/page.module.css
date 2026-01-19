@@ -855,3 +855,150 @@
 .teamCard:hover .memberHandle {
   color: #00ff88;
 }
+@media (max-width: 768px) {
+  /* Navbar Mobile */
+  .nav {
+    width: 95%;
+    top: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .navContainer {
+    padding: 0.5rem 1rem;
+    justify-content: center; /* Center logo since links are hidden */
+  }
+  
+  .navLinks a {
+    display: none; /* Hide links on mobile for cleaner look */
+  }
+
+  .logo {
+    font-size: 1rem; /* Smaller logo text */
+  }
+
+  .logoIcon {
+    padding: 4px; /* Smaller icon container */
+  }
+  
+  .logoIcon img {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Hero Mobile */
+  .hero {
+    padding-top: 7rem;
+    padding-bottom: 6rem; /* Add more space for visual */
+    gap: 2rem;
+  }
+
+  .heroContent {
+    align-items: center; /* Force badge and buttons to center */
+    padding-right: 0; /* Remove desktop offset */
+    text-align: center;
+  }
+
+  .heroTitle {
+    font-size: 2.2rem; /* Much smaller title to fit screen */
+  }
+  
+  .badge {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.65rem; /* Smaller badge text */
+    margin-bottom: 1.5rem;
+  }
+  
+  .heroDesc {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .heroCtas {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+  
+  .primaryBtn, .secondaryBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Setup Guide Mobile */
+  .stepsGrid {
+    gap: 2rem;
+  }
+  
+  .stepItem {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  /* Mobile Timeline (Vertical Stack) */
+  .timelineSection {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+
+  .timelineHeader {
+    margin-bottom: 4rem;
+  }
+
+  .centerLine, .scanningDot {
+    display: none; /* Remove center line on mobile */
+  }
+  
+  .timelineItem {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 6rem; /* More breathing room between features */
+    text-align: center;
+  }
+  
+  .timelineSide {
+    width: 100%;
+    text-align: center !important; /* Force center alignment */
+  }
+  
+  .timelineNode {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+  }
+  
+  .detailCard {
+    padding: 1.5rem;
+  }
+
+  .detailCard::before {
+    display: none; /* Remove connectors */
+  }
+  
+  .titleSide h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Modal Mobile */
+  .modalContent {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .modalList {
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+  
+  .ctaContainer h2 {
+    font-size: 2.5rem;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}

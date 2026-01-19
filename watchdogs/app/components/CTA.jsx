@@ -41,17 +41,17 @@ export default function CTA() {
               onClick={() => setShowModal(true)}
               className={styles.primaryBtn}
             >
-              Download WatchDog v3.2
+              Download
             </button>
           ) : (
             <motion.a
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              href="/watchdog-v3.2.exe" // This would be the real file
+              href="https://drive.google.com/uc?export=download&id=1q123FLfly3RglU3bLBCvtLD4N39n9wAO"
               className={styles.primaryBtn}
               style={{ background: "#fff", color: "#000" }} // Visual feedback
             >
-              Start Download (.exe)
+              Start Download
             </motion.a>
           )}
         </motion.div>

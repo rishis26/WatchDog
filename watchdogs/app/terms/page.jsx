@@ -150,11 +150,11 @@ export default function Terms() {
               and agreed to these terms.
             </p>
             <a
-              href="/watchdog-v3.2.exe"
+              href="https://drive.google.com/uc?export=download&id=1q123FLfly3RglU3bLBCvtLD4N39n9wAO"
               className={styles.primaryBtn}
               style={{ display: "inline-block" }}
             >
-              Agree & Download v3.2
+              Agree & Download
             </a>
           </div>
         </div>

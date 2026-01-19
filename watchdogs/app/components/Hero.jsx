@@ -49,7 +49,7 @@ export default function Hero() {
 
         <motion.div variants={fadeInUp} className={styles.heroCtas}>
           <a href="#download" className={styles.primaryBtn}>
-            Download v3.2
+            Download
           </a>
           <a href="#features" className={styles.secondaryBtn}>
             View Capabilities
