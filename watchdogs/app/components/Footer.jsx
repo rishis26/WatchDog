@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import styles from "../page.module.css";
 
 const contributors = [
@@ -33,7 +32,7 @@ export default function Footer() {
         <div className={styles.footerContent}>
           <div className={styles.logo}>
             <div className={styles.logoIcon}>
-              <Image src="/logo.png" alt="WD" width={40} height={40} />
+              <Image src="/logo.png" alt="WD" width={48} height={48} />
             </div>
             <span>WatchDog</span>
           </div>
@@ -42,91 +41,58 @@ export default function Footer() {
               onClick={() => setShowContributors(true)}
               className={styles.footerLinkBtn}
             >
-              GitHub
+              GitHub / Team
             </button>
-            <Link href="/terms">Terms of Service</Link>
+            <Link href="/terms">Terms</Link>
           </div>
         </div>
       </footer>
 
-      <AnimatePresence>
-        {showContributors && (
-          <motion.div
-            className={styles.modalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowContributors(false)}
+      {showContributors && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowContributors(false)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              className={styles.modalContent}
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3>Project Contributors</h3>
-              <div
-                className={styles.teamGrid}
-                style={{ marginTop: "1rem", gap: "1rem" }}
-              >
-                {contributors.map((member, i) => (
+            <div className={styles.heroMeta}>
+              <span className={styles.metaLabel}>Development</span>
+              <span className={styles.metaDivider}>—</span>
+              <span className={styles.metaYear}>Team</span>
+            </div>
+            <h3>Project Contributors</h3>
+            <div className={styles.modalList}>
+              {contributors.map((member, i) => (
+                <li key={i}>
                   <a
-                    key={i}
                     href={`https://github.com/${member.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.teamCard}
-                    style={{
-                      width: "100%",
-                      flexDirection: "row",
-                      padding: "1rem",
-                      textAlign: "left",
-                    }}
+                    style={{ color: "inherit", textDecoration: "none" }}
                   >
-                    <div
-                      className={styles.memberAvatar}
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        marginBottom: "0",
-                        marginRight: "1rem",
-                      }}
-                    >
-                      <Image
-                        src={`https://github.com/${member.github}.png`}
-                        alt={member.name}
-                        width={50}
-                        height={50}
-                        className={styles.avatarImg}
-                      />
-                    </div>
-                    <div className={styles.memberInfo}>
-                      <h3 style={{ fontSize: "1rem", margin: 0 }}>
-                        {member.name}
-                      </h3>
-                      <span className={styles.memberHandle}>
-                        @{member.github}
-                      </span>
-                    </div>
+                    <span style={{ color: "#fff", fontWeight: 700 }}>
+                      {member.name}
+                    </span>
+                    <span style={{ marginLeft: "1rem", opacity: 0.5 }}>
+                      @{member.github}
+                    </span>
                   </a>
-                ))}
-              </div>
-              <div
-                className={styles.modalActions}
-                style={{ marginTop: "1.5rem" }}
+                </li>
+              ))}
+            </div>
+            <div className={styles.modalActions}>
+              <button
+                onClick={() => setShowContributors(false)}
+                className={`${styles.modalBtn} ${styles.acceptBtn}`}
               >
-                <button
-                  onClick={() => setShowContributors(false)}
-                  className={`${styles.modalBtn} ${styles.acceptBtn}`}
-                >
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
