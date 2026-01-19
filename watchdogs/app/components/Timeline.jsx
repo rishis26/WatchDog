@@ -15,12 +15,6 @@ const fadeInUp = {
 };
 
 export default function Timeline() {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start end", "end end"],
-  });
-
   const features = [
     {
       title: "Intruder Capture",
@@ -65,63 +59,36 @@ export default function Timeline() {
   ];
 
   return (
-    <section id="features" ref={targetRef} className={styles.timelineSection}>
-      <motion.div
-        className={styles.timelineHeader}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-      >
+    <section id="features" className={styles.timelineSection}>
+      <div className={styles.timelineHeader}>
         <span className={styles.sectionTag}>CAPABILITIES</span>
         <h2>Armed for Every Scenario</h2>
         <p>A complete suite of tools to protect your hardware and data.</p>
-      </motion.div>
+      </div>
 
       <div className={styles.centerLine}>
         <div className={styles.scanningDot}></div>
-        <motion.div
-          style={{ height: scrollYProgress }}
-          className={styles.centerLineProgress}
-        />
+        <div className={styles.centerLineProgress} />
       </div>
 
       {features.map((feature, i) => (
         <div key={i} className={styles.timelineItem}>
           {/* Title Side */}
-          <motion.div
-            className={`${styles.timelineSide} ${styles.titleSide}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-15%" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
+          <div className={`${styles.timelineSide} ${styles.titleSide}`}>
             <h3>{feature.title}</h3>
-          </motion.div>
+          </div>
 
           {/* Center Node */}
-          <motion.div
-            className={styles.timelineNode}
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false, margin: "-15%" }}
-            transition={{ duration: 0.4, ease: "backOut" }}
-          >
+          <div className={styles.timelineNode}>
             <div className={styles.timelineIcon}>{feature.icon}</div>
-          </motion.div>
+          </div>
 
           {/* Detail Side */}
-          <motion.div
-            className={`${styles.timelineSide} ${styles.detailSide}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-15%" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
+          <div className={`${styles.timelineSide} ${styles.detailSide}`}>
             <div className={styles.detailCard}>
               <p>{feature.desc}</p>
             </div>
-          </motion.div>
+          </div>
         </div>
       ))}
     </section>

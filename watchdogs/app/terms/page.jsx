@@ -1,13 +1,27 @@
 "use client";
 
+import Image from "next/image";
 import styles from "../page.module.css";
-import Navbar from "../components/Navbar";
+// Navbar removed, replaced with direct header
 import Footer from "../components/Footer";
 
 export default function Terms() {
   return (
     <div className={styles.page}>
-      <Navbar />
+      <header className={styles.simpleHeader}>
+        <div className={styles.logo}>
+          <div className={styles.logoIcon}>
+            <Image
+              src="/logo.png"
+              alt="WatchDog Logo"
+              width={48}
+              height={48}
+              priority
+            />
+          </div>
+          WatchDog
+        </div>
+      </header>
       <div
         className={styles.section}
         style={{
@@ -23,7 +37,7 @@ export default function Terms() {
           <h1
             style={{
               fontSize: "3rem",
-              fontFamily: "var(--font-orbitron)",
+              fontFamily: "var(--font-space)",
               marginBottom: "2rem",
               color: "#fff",
             }}
@@ -35,9 +49,9 @@ export default function Terms() {
             <h2
               style={{
                 fontSize: "1.5rem",
-                color: "#00ff88",
+                color: "#fff",
                 marginBottom: "1rem",
-                fontFamily: "var(--font-orbitron)",
+                fontFamily: "var(--font-space)",
               }}
             >
               1. Purpose of Software
@@ -56,9 +70,9 @@ export default function Terms() {
             <h2
               style={{
                 fontSize: "1.5rem",
-                color: "#00ff88",
+                color: "#fff",
                 marginBottom: "1rem",
-                fontFamily: "var(--font-orbitron)",
+                fontFamily: "var(--font-space)",
               }}
             >
               2. Prohibited Uses
@@ -95,9 +109,9 @@ export default function Terms() {
             <h2
               style={{
                 fontSize: "1.5rem",
-                color: "#00ff88",
+                color: "#fff",
                 marginBottom: "1rem",
-                fontFamily: "var(--font-orbitron)",
+                fontFamily: "var(--font-space)",
               }}
             >
               3. Liability & Responsibility
@@ -115,9 +129,9 @@ export default function Terms() {
             <h2
               style={{
                 fontSize: "1.5rem",
-                color: "#00ff88",
+                color: "#fff",
                 marginBottom: "1rem",
-                fontFamily: "var(--font-orbitron)",
+                fontFamily: "var(--font-space)",
               }}
             >
               4. Data Privacy
@@ -133,8 +147,8 @@ export default function Terms() {
           <div
             style={{
               padding: "1.5rem",
-              background: "rgba(0, 255, 136, 0.05)",
-              border: "1px solid rgba(0, 255, 136, 0.2)",
+              background: "rgba(255, 255, 255, 0.05)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
               borderRadius: "12px",
               marginTop: "2rem",
             }}
